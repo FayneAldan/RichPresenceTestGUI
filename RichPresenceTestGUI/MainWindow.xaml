@@ -1,0 +1,60 @@
+﻿<Window x:Class="RichPresenceTestGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RichPresenceTestGUI"
+        mc:Ignorable="d"
+        Title="Rich Presence Test GUI" Height="450" Width="800" Closing="DoShutdown">
+    <TabControl SelectedIndex="1" SelectionChanged="ChangeTab">
+        <TabItem x:Name="LogTab" Header="[0] Log">
+            <ScrollViewer>
+                <StackPanel x:Name="LogPanel" Margin="10">
+                    <TextBlock TextWrapping="Wrap" Text="Start of log" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem x:Name="InitTab" Header="Initialization">
+            <Grid>
+                <Label Content="Client ID" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <TextBox x:Name="ClientID" VerticalAlignment="Top" Margin="70,10,10,0" Height="26" VerticalContentAlignment="Center" Text="444517509148966923"/>
+                <CheckBox x:Name="AutoRegister" Content="Auto Register" Margin="10,41,10,0" Height="26" VerticalAlignment="Top" VerticalContentAlignment="Center" />
+                <Label Content="Steam ID" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="SteamID" Height="26" Margin="73,72,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                <Button Content="Initialize" Margin="10,0,10,10" IsDefault="{Binding IsSelected, ElementName=InitTab}" Height="40" VerticalAlignment="Bottom" Click="DoInitialize"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="PresenceTab" Header="Presence">
+            <Grid>
+                <Grid Height="35" VerticalAlignment="Bottom" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Undo" Margin="10,0,0,0"/>
+                    <Button Content="Update" Grid.Column="1" Margin="5,0" IsDefault="True"/>
+                    <Button Content="Clear" Grid.Column="2" Margin="0,0,10,0" Click="PresenceClear"/>
+                </Grid>
+                <Label Content="WIP!" Margin="10,10,10,50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="RespondTab" Header="Respond">
+            <Grid>
+                <Label Content="User ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="RespondID" Height="26" Margin="64,10,10,0" VerticalAlignment="Top" VerticalContentAlignment="Center" TextChanged="RemoveRespondName"/>
+                <Grid Height="35" Margin="0,41,0,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="No" Margin="10,0,0,0" Click="RespondNo"/>
+                    <Button Content="Yes" Grid.Column="1" Margin="5,0" Click="RespondYes"/>
+                    <Button Content="Ignore" Grid.Column="2" Margin="0,0,10,0" Click="RespondIgnore"/>
+                </Grid>
+                <Label x:Name="RespondName" Content="" Margin="10,81,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="50"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
